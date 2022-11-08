@@ -34,6 +34,7 @@ class SendEmails extends Command
     {
         $saleRepository = new SaleRepository();
         $sellerRepository = new SellerRepository();
+
         $sellers = $sellerRepository->getAllSellers();
 
         foreach ($sellers as $seller) {
