@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -37,7 +36,6 @@ class SalesReport extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('teste@gmail.com', 'Contato Tray'),
             subject: 'Relatório de Vendas de Hoje',
         );
     }
@@ -50,7 +48,7 @@ class SalesReport extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.sales.report',
+            view: 'emails.sales.reports.index',
         );
     }
 

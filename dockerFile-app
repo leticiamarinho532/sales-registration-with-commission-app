@@ -2,7 +2,7 @@ FROM php:8.1.10-fpm-alpine3.16
 
 RUN apk add --no-cache openssl bash vim mysql-client
 
-RUN docker-php-ext-install pdo pdo_mysql bcmath
+RUN docker-php-ext-install pdo pdo_mysql bcmath mysqli && docker-php-ext-enable pdo_mysql
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/

@@ -19,6 +19,7 @@ class SaleRepository implements SaleRepositoryInterface
     public function getSellerAllSales($sellerId)
     {
         return DB::table('sale')
-            ->where('seller_id', '=', $sellerId);
+            ->where('seller_id', '=', $sellerId)
+            ->get();
     }
 }
