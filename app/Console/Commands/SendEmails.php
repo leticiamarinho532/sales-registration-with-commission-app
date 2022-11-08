@@ -6,6 +6,8 @@ use App\Mail\SalesReport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Repository\SaleRepository;
+use App\Repository\SellerRepository;
 
 class SendEmails extends Command
 {
@@ -30,9 +32,12 @@ class SendEmails extends Command
      */
     public function handle()
     {
-        $sellers = $this->getAllSellers();
+        $saleRepository = new SaleRepository();
+        $sellerRepository = new SellerRepository();
+        $sellers = $sellerRepository->getAllSellers();
+
         foreach ($sellers as $seller) {
-            $sales = $this->getSellerSales($seller->id);
+            $sales = $saleRepository->getSellerAllSales($seller->id);
 
             $sumAllSalesDay = 0;
             foreach ($sales as $sale) {
@@ -41,17 +46,5 @@ class SendEmails extends Command
 
             Mail::to($seller->email)->send(new SalesReport($seller, $sumAllSalesDay));
         }
-    }
-
-    private function getAllSellers()
-    {
-        return DB::table('seller')
-            ->get();
-    }
-
-    private function getSellerSales($sellerId)
-    {
-        return DB::table('sale')
-            ->where('seller_id', '=', $sellerId);
     }
 }
