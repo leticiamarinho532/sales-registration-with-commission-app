@@ -11,7 +11,7 @@ services:
       - dependency-manager-composer
       - db
     networks:
-      - app-currency-history-networks
+      - app-seller-registraion-with-commission-networks
 
   nginx:
     image: nginx:alpine
@@ -24,7 +24,7 @@ services:
     depends_on:
       - app
     networks:
-      - app-currency-history-networks
+      - app-seller-registraion-with-commission-networks
 
   db:
     image: mysql
@@ -33,9 +33,9 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: root-password
+      MYSQL_ROOT_PASSWORD: example
     networks:
-      - app-currency-history-networks
+      - app-seller-registraion-with-commission-networks
   
   db-adminer:
     image: adminer
@@ -44,8 +44,10 @@ services:
       ADMINER_DEFAULT_SERVER: db
     ports:
       - 8081:8080
+    depends_on:
+      - db
     networks:
-      - app-currency-history-networks
+      - app-seller-registraion-with-commission-networks
   
   dependency-manager-composer:
     build:
@@ -56,5 +58,5 @@ services:
         - ./:/var/www/
 
 networks:
-  app-currency-history-networks:
+  app-seller-registraion-with-commission-networks:
     driver: bridge
