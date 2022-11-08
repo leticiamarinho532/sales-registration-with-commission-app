@@ -1,0 +1,60 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerFile-app
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www/
+    depends_on:
+      - dependency-manager-composer
+      - db
+    networks:
+      - app-currency-history-networks
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www/
+      - ./nginx:/etc/nginx/conf.d/
+    depends_on:
+      - app
+    networks:
+      - app-currency-history-networks
+
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root-password
+    networks:
+      - app-currency-history-networks
+  
+  db-adminer:
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    ports:
+      - 8081:8080
+    networks:
+      - app-currency-history-networks
+  
+  dependency-manager-composer:
+    build:
+        context: .
+        dockerfile: dockerFile-dependency-manager-composer
+    command: composer install
+    volumes:
+        - ./:/var/www/
+
+networks:
+  app-currency-history-networks:
+    driver: bridge
