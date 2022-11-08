@@ -15,14 +15,18 @@ class SalesReport extends Mailable
     use Queueable;
     use SerializesModels;
 
+    public $seller;
+    public $sumAllSalesDay;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($seller, $sumAllSalesDay)
     {
-        //
+        $this->seller = $seller;
+        $this->sumAllSalesDay = $sumAllSalesDay;
     }
 
     /**
