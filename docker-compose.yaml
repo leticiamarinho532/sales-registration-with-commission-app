@@ -3,9 +3,9 @@ services:
   app:
     build:
       context: .
-      dockerfile: dockerFile-app
+      dockerfile: ./back-end/dockerFile-app
     volumes:
-      - ./:/var/www/
+      - ./back-end/:/var/www/
     working_dir: /var/www/
     depends_on:
       - dependency-manager-composer
@@ -19,8 +19,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/var/www/
-      - ./nginx:/etc/nginx/conf.d/
+      - ./back-end/:/var/www/
+      - ./back-end/nginx:/etc/nginx/conf.d/
     depends_on:
       - app
     networks:
@@ -52,10 +52,10 @@ services:
   dependency-manager-composer:
     build:
         context: .
-        dockerfile: dockerFile-dependency-manager-composer
+        dockerfile: ./back-end/dockerFile-dependency-manager-composer
     command: composer install
     volumes:
-        - ./:/var/www/
+        - ./back-end/:/var/www/
 
 networks:
   app-seller-registraion-with-commission-networks:
