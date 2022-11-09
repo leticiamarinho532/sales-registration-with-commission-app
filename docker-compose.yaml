@@ -13,7 +13,7 @@ services:
     networks:
       - app-seller-registraion-with-commission-networks
 
-  nginx:
+  app-nginx-back-end:
     image: nginx:alpine
     restart: unless-stopped
     ports:
