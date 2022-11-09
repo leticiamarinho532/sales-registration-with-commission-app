@@ -15,10 +15,10 @@ class SaleSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 1; $i < 6; $i++) {
             DB::table('sale')->insert([
                 'value' => rand(50, 1000),
-                'seller_id' => rand(1, 5),
+                'seller_id' => $i,
                 'created_at' => DB::raw('CURRENT_TIMESTAMP')
             ]);
         }
