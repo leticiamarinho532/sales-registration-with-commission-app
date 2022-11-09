@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Repository\Interface\SaleRepositoryInterface;
-use App\Repository\Interface\SellerRepositoryInterface;
+use App\Repositories\Interfaces\SaleRepositoryInterface;
+use App\Repositories\Interfaces\SellerRepositoryInterface;
 
 class SaleService
 {
@@ -33,7 +33,7 @@ class SaleService
         $result = $this->saleRepository->createSale($sellerId, $value);
 
         if (!$result) {
-            return 'Um erro ocorreu ao registrar sua venda!';
+            return false;
         }
 
         return 'Venda registrada com sucesso.';

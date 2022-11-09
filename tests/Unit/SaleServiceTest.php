@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Repository\Interface\SaleRepositoryInterface;
-use App\Repository\Interface\SellerRepositoryInterface;
+use App\Repositories\Interfaces\SaleRepositoryInterface;
+use App\Repositories\Interfaces\SellerRepositoryInterface;
 use Tests\TestCase;
 use App\Services\SaleService;
 use stdClass;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
-use App\Repository\Interface\SellerRepositoryInterface;
+use App\Repositories\Interfaces\SellerRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class SellerRepository implements SellerRepositoryInterface
@@ -20,5 +20,14 @@ class SellerRepository implements SellerRepositoryInterface
     {
         return DB::table('seller')
             ->get();
+    }
+
+    public function getAllSellersId()
+    {
+        return DB::table('seller')
+            ->select('id')
+            ->get()
+            ->pluck('id')
+            ->toArray();
     }
 }

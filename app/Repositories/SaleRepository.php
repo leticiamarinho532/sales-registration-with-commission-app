@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Repository;
+namespace App\Repositories;
 
-use App\Repository\Interface\SaleRepositoryInterface;
+use App\Repositories\Interfaces\SaleRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
 class SaleRepository implements SaleRepositoryInterface
 {
     public function createSale($sellerId, $value)
     {
-        return DB::table('seller')
+        return DB::table('sale')
             ->insert([
                 'seller_id' => $sellerId,
                 'value' => $value
