@@ -23,7 +23,7 @@ class SaleServiceTest extends TestCase
         $this->sellerRepositoryMock->shouldReceive('getAllSellersId')->andReturn($randomSellersIds);
 
         $this->saleRepositoryMock = $this->mock(SaleRepositoryInterface::class);
-        $this->saleRepositoryMock->shouldReceive('getSellerAllSales')->andReturn([]);
+        $this->saleRepositoryMock->shouldReceive('createSale')->andReturn(true);
     }
 
     public function testShouldReturnFalseInCreateSaleWithInvalidSeller()
@@ -62,6 +62,21 @@ class SaleServiceTest extends TestCase
         $this->assertFalse($output);
     }
 
+    public function testShouldCreateSaleWhenSellerExistsAndValuePositiveNumber()
+    {
+        $simulateSaleRegister = new SaleService($this->saleRepositoryMock, $this->sellerRepositoryMock);
+        $input = new stdClass();
+        $input->sellerId = rand(10, 15);
+        $input->value = rand(10, 50);
+
+        $output = $simulateSaleRegister->create($input->sellerId, $input->value);
+
+        $this->assertEquals(
+            $output,
+            'Venda registrada com sucesso.'
+        );
+    }
+
     public function testShouldReturnFalseInListSalesOfNotExistingSeller()
     {
         $simulateListSales = new SaleService($this->saleRepositoryMock, $this->sellerRepositoryMock);
@@ -75,6 +90,8 @@ class SaleServiceTest extends TestCase
 
     public function testShouldReturnMessageWarningEmptnessWhenSellerHasNoSales()
     {
+        $this->saleRepositoryMock->shouldReceive('getSellerAllSales')->andReturn([]);
+
         $simulateListSales = new SaleService($this->saleRepositoryMock, $this->sellerRepositoryMock);
         $input = new stdClass();
         $input->sellerId = rand(10, 15);
@@ -84,6 +101,29 @@ class SaleServiceTest extends TestCase
         $this->assertEquals(
             $output,
             'Nenhuma venda registrada.'
+        );
+    }
+
+    public function testShouldListAllSalesWhenSellerExistsAndSalesExists()
+    {
+        $input = new stdClass();
+        $input->sellerId = 10;
+
+        $fakeSales = new stdClass();
+        $fakeSales->sellerId = 10;
+        $fakeSales->value = 350;
+        $fakeSales = json_encode($fakeSales);
+
+        $this->saleRepositoryMock->shouldReceive('getSellerAllSales')->andReturn($fakeSales);
+
+        $simulateListSales = new SaleService($this->saleRepositoryMock, $this->sellerRepositoryMock);
+        ;
+
+        $output = $simulateListSales->getSellerAllSales($input->sellerId);
+
+        $this->assertEquals(
+            $output,
+            $fakeSales
         );
     }
 }

@@ -30,7 +30,13 @@ class SaleService
             return false;
         }
 
-        // ...
+        $result = $this->saleRepository->createSale($sellerId, $value);
+
+        if (!$result) {
+            return 'Um erro ocorreu ao registrar sua venda!';
+        }
+
+        return 'Venda registrada com sucesso.';
     }
 
     public function getSellerAllSales($sellerId)
@@ -46,6 +52,8 @@ class SaleService
         if (empty($sales)) {
             return 'Nenhuma venda registrada.';
         }
+
+        return $sales;
     }
 
     private function isValidValue($value)
