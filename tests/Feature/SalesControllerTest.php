@@ -51,8 +51,6 @@ class SalesControllerTest extends TestCase
     {
         $response = $this->get('/api/sale/' . $this->sellerId . '/show/');
 
-        // dd($this->sellerId, $response->getData());
-
         $response->assertStatus(200)
             ->assertJson(
                 fn (AssertableJson $json) =>
