@@ -8,6 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
 class SalesReport extends Mailable
 {
@@ -36,7 +37,8 @@ class SalesReport extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Relatório de Vendas de Hoje',
+            from: new Address('desafiotecnico.tray@gmail.com', 'Contato Tray'),
+            subject: 'Relatório de Vendas de Hoje'
         );
     }
 
