@@ -35,16 +35,16 @@ class SalesControllerTest extends TestCase
     }
 
 
-    public function testShouldCreateASaleWithEXistingSellerIdAndPositiveValueNumber()
+    public function testShouldCreateASaleWithExistingSellerIdAndPositiveValueNumber()
     {
         $response = $this->post('/api/sale/create', ['sellerId' => $this->sellerId, 'value' => rand(1, 1000)]);
 
         $response->assertStatus(200)
-            ->assertJson([
-                'retcode' => 'SUCCESS',
-                'data' => '',
-                'message' => 'Venda registrada com sucesso.'
-            ]);
+            ->assertJson(
+                fn (AssertableJson $json) =>
+                $json->hasAny('data', 'id', 'name', 'email', 'commission', 'value', 'sale_date')
+                    ->etc()
+            );
     }
 
     public function testShouldListAllSalesByOneSellerId()
