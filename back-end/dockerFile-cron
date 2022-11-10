@@ -1,0 +1,7 @@
+FROM php:8.1.10-fpm-alpine3.16
+
+RUN docker-php-ext-install pdo pdo_mysql
+
+COPY ./back-end/crontab /etc/crontab/root
+
+CMD [ "crond", "-f" ]
