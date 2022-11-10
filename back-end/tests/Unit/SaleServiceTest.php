@@ -13,6 +13,7 @@ class SaleServiceTest extends TestCase
 {
     private $sellerRepositoryMock;
     private $saleRepositoryMock;
+    private $saleData;
 
     protected function setUp(): void
     {
@@ -23,7 +24,16 @@ class SaleServiceTest extends TestCase
         $this->sellerRepositoryMock->shouldReceive('getAllSellersId')->andReturn($randomSellersIds);
 
         $this->saleRepositoryMock = $this->mock(SaleRepositoryInterface::class);
-        $this->saleRepositoryMock->shouldReceive('createSale')->andReturn(true);
+        $this->saleData = json_encode([
+            'id' => 1,
+            'name' => Str::random(10),
+            'email' => fake()->unique()->email(),
+            'commission' => 'R$ 8.5',
+            'value' => 'R$ 100',
+            'saleCreation' => '2022-11-08 19:50:00'
+        ]);
+
+        $this->saleRepositoryMock->shouldReceive('createSale')->andReturn($this->saleData);
     }
 
     public function testShouldReturnFalseInCreateSaleWithInvalidSeller()
@@ -72,8 +82,8 @@ class SaleServiceTest extends TestCase
         $output = $simulateSaleRegister->create($input->sellerId, $input->value);
 
         $this->assertEquals(
+            $this->saleData,
             $output,
-            'Venda registrada com sucesso.'
         );
     }
 

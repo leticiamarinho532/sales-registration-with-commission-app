@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Interfaces\SaleRepositoryInterface;
 use App\Repositories\Interfaces\SellerRepositoryInterface;
+use stdClass;
 
 class SaleService
 {
@@ -30,13 +31,15 @@ class SaleService
             return false;
         }
 
-        $result = $this->saleRepository->createSale($sellerId, $value);
+        $sale = $this->saleRepository->createSale($sellerId, $value);
 
-        if (!$result) {
+        if (!$sale) {
             return false;
         }
 
-        return 'Venda registrada com sucesso.';
+        $saleInfos = $this->formatDefaultSaleToOutput($sellerId, $value, $sale);
+
+        return $saleInfos;
     }
 
     public function getSellerAllSales($sellerId)
@@ -54,6 +57,24 @@ class SaleService
         }
 
         return $sales;
+    }
+
+    public function formatDefaultSaleToOutput($sellerId, $saleValue, $sale)
+    {
+        $sellerService = new SellerService($this->sellerRepository, $this->saleRepository);
+        $comissionService = new CommissionService();
+
+        $sellerInfos = $sellerService->getSellerById($sellerId);
+
+        $saleInfos = new stdClass();
+        $saleInfos->id = $sale->id;
+        $saleInfos->name = $sellerInfos->id;
+        $saleInfos->email = $sellerInfos->email;
+        $saleInfos->commission = 'R$' . $comissionService->calculate($saleValue);
+        $saleInfos->value = 'R$' . $saleValue;
+        $saleInfos->sale_date = $sale->created_at;
+
+        return $saleInfos;
     }
 
     private function isValidValue($value)

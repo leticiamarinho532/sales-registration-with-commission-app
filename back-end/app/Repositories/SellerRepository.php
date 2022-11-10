@@ -30,4 +30,11 @@ class SellerRepository implements SellerRepositoryInterface
             ->pluck('id')
             ->toArray();
     }
+
+    public function getSellerById($sellerId)
+    {
+        return DB::table('seller')
+            ->where('id', '=', $sellerId)
+            ->first();
+    }
 }

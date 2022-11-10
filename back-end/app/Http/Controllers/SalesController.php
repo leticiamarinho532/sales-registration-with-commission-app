@@ -61,8 +61,8 @@ class SalesController extends Controller
 
         return response()->json([
             'retcode' => 'SUCCESS',
-            'data' => '',
-            'message' => $output
+            'data' => $output,
+            'message' => ''
         ]);
     }
 

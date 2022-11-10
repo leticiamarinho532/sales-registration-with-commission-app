@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\SellerRepository;
+use App\Repositories\SaleRepository;
 use Illuminate\Support\Facades\Validator;
 use App\Services\SellerService;
 
 class SellersController extends Controller
 {
     private $sellerRepository;
+    private $saleRepository;
 
     public function __construct(
-        SellerRepository $sellerRepository
+        SellerRepository $sellerRepository,
+        SaleRepository $saleRepository
     ) {
         $this->sellerRepository = $sellerRepository;
+        $this->saleRepository = $saleRepository;
     }
 
     public function createSeller(Request $request)
@@ -41,7 +45,8 @@ class SellersController extends Controller
         }
 
         $sellerService = new SellerService(
-            $this->sellerRepository
+            $this->sellerRepository,
+            $this->saleRepository
         );
 
         $output = $sellerService->create($request->input('name'), $request->input('email'));
@@ -64,7 +69,8 @@ class SellersController extends Controller
     public function getAllSellers()
     {
         $sellerService = new SellerService(
-            $this->sellerRepository
+            $this->sellerRepository,
+            $this->saleRepository
         );
 
         $output = $sellerService->getAllSellers();
