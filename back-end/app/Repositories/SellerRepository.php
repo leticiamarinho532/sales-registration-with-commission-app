@@ -18,14 +18,12 @@ class SellerRepository implements SellerRepositoryInterface
 
     public function getAllSellers()
     {
-        return DB::table('seller')
-            ->get();
+        return Seller::get();
     }
 
     public function getAllSellersId()
     {
-        return DB::table('seller')
-            ->select('id')
+        return Seller::select('id')
             ->get()
             ->pluck('id')
             ->toArray();
@@ -33,8 +31,7 @@ class SellerRepository implements SellerRepositoryInterface
 
     public function getSellerById($sellerId)
     {
-        return DB::table('seller')
-            ->where('id', '=', $sellerId)
-            ->first();
+        return Seller::where('id', '=', $sellerId)
+        ->first();
     }
 }

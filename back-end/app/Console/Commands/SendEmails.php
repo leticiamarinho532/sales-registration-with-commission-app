@@ -6,8 +6,8 @@ use App\Mail\SalesReport;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-use App\Repository\SaleRepository;
-use App\Repository\SellerRepository;
+use App\Repositories\SaleRepository;
+use App\Repositories\SellerRepository;
 
 class SendEmails extends Command
 {
