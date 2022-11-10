@@ -116,8 +116,8 @@ class SaleServiceTest extends TestCase
         $output = $simulateListSales->getSellerAllSales($input->sellerId);
 
         $this->assertEquals(
-            $output,
-            'Nenhuma venda registrada.'
+            'Nenhuma venda registrada.',
+            $output
         );
     }
 

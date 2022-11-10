@@ -77,8 +77,8 @@ class SellerServiceTest extends TestCase
         $output = $simulateCreateSeller->getAllSellers();
 
         $this->assertEquals(
-            $output,
-            'Nenhum vendedor cadastrado.'
+            'Nenhum vendedor cadastrado.',
+            $output
         );
     }
 
