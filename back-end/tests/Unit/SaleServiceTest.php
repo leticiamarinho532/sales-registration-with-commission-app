@@ -19,20 +19,26 @@ class SaleServiceTest extends TestCase
     {
         parent::setUp();
 
+
         $this->sellerRepositoryMock = $this->mock(SellerRepositoryInterface::class);
+
         $randomSellersIds = range(10, 15);
         $this->sellerRepositoryMock->shouldReceive('getAllSellersId')->andReturn($randomSellersIds);
 
-        $this->saleRepositoryMock = $this->mock(SaleRepositoryInterface::class);
-        $this->saleData = json_encode([
-            'id' => 1,
-            'name' => Str::random(10),
-            'email' => fake()->unique()->email(),
-            'commission' => 'R$ 8.5',
-            'value' => 'R$ 100',
-            'saleCreation' => '2022-11-08 19:50:00'
-        ]);
+        $seller = new stdClass();
+        $seller->id = 1;
+        $seller->name = Str::random(10);
+        $seller->email = fake()->unique()->email();
+        $this->sellerRepositoryMock->shouldReceive('getSellerById')->andReturn($seller);
 
+        $this->saleRepositoryMock = $this->mock(SaleRepositoryInterface::class);
+
+        $saleData = new stdClass();
+        $saleData->id = 1;
+        $saleData->name = $seller->name;
+        $saleData->commission = 'R$ 8.5';
+        $saleData->value = 'R$ 100';
+        $saleData->saleCreation = '2022-11-08 19:50:00';
         $this->saleRepositoryMock->shouldReceive('createSale')->andReturn($this->saleData);
     }
 

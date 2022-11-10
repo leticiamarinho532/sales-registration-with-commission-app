@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Repositories\Interfaces\SellerRepositoryInterface;
 use App\Repositories\Interfaces\SaleRepositoryInterface;
 use App\Services\CommissionService;
+use stdClass;
 
 class SellerService
 {
@@ -29,13 +30,15 @@ class SellerService
             return false;
         }
 
-        $result = $this->sellerRepository->createSeller($name, $email);
+        $seller = $this->sellerRepository->createSeller($name, $email);
 
-        if (!$result) {
+        if (!$seller) {
             return false;
         }
 
-        return 'Vendedor cadastrado com sucesso.';
+        $sellerFormattedInfos = $this->formatDefaultSellerCreatedToOutPut($seller);
+
+        return $sellerFormattedInfos;
     }
 
     public function getAllSellers()
@@ -47,6 +50,7 @@ class SellerService
             return 'Nenhum vendedor cadastrado.';
         }
 
+        $formattedSellers = [];
         foreach ($sellers as $seller) {
             $comissionValue = 0;
             $sales = $this->saleRepository->getSellerAllSales($seller->id);
@@ -55,11 +59,32 @@ class SellerService
                 $comissionValue = $comissionValue + $comissionService->calculate($sale->value);
             }
 
-            $seller->commission = 'R$' . $comissionValue;
+            array_push($formattedSellers, $this->formatDefaultSellerToOutput($seller, $comissionValue));
         }
 
 
-        return $sellers;
+        return $formattedSellers;
+    }
+
+    public function formatDefaultSellerToOutput($seller, $commission)
+    {
+        $sellerInfos = new stdClass();
+        $sellerInfos->id = $seller->id;
+        $sellerInfos->name = $seller->name;
+        $sellerInfos->email = $seller->email;
+        $sellerInfos->commission = 'R$' . $commission;
+
+        return $sellerInfos;
+    }
+
+    public function formatDefaultSellerCreatedToOutPut($seller)
+    {
+        $sellerInfos = new stdClass();
+        $sellerInfos->id = $seller->id;
+        $sellerInfos->name = $seller->name;
+        $sellerInfos->email = $seller->email;
+
+        return $sellerInfos;
     }
 
     public function getSellerById($sellerId)

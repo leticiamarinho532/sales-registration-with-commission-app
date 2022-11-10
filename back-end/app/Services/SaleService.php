@@ -56,7 +56,12 @@ class SaleService
             return 'Nenhuma venda registrada.';
         }
 
-        return $sales;
+        $formattedSalles = [];
+        foreach ($sales as $sale) {
+            array_push($formattedSalles, $this->formatDefaultSaleToOutput($sellerId, $sale->value, $sale));
+        }
+
+        return $formattedSalles;
     }
 
     public function formatDefaultSaleToOutput($sellerId, $saleValue, $sale)

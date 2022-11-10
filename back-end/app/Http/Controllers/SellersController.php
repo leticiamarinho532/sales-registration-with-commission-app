@@ -61,8 +61,8 @@ class SellersController extends Controller
 
         return response()->json([
             'retcode' => 'SUCCESS',
-            'data' => '',
-            'message' => $output
+            'data' => $output,
+            'message' => ''
         ]);
     }
 
@@ -85,8 +85,8 @@ class SellersController extends Controller
 
         return response()->json([
             'retcode' => 'SUCCESS',
-            'data' => '',
-            'message' => $output
+            'data' => $output,
+            'message' => ''
         ]);
     }
 }
