@@ -13,17 +13,34 @@ class SaleServiceTest extends TestCase
 {
     private $sellerRepositoryMock;
     private $saleRepositoryMock;
+    private $saleData;
+    private $seller;
 
     protected function setUp(): void
     {
         parent::setUp();
 
+
         $this->sellerRepositoryMock = $this->mock(SellerRepositoryInterface::class);
+
         $randomSellersIds = range(10, 15);
         $this->sellerRepositoryMock->shouldReceive('getAllSellersId')->andReturn($randomSellersIds);
 
+        $this->seller = new stdClass();
+        $this->seller->id = 1;
+        $this->seller->name = Str::random(10);
+        $this->seller->email = fake()->unique()->email();
+        $this->sellerRepositoryMock->shouldReceive('getSellerById')->andReturn($this->seller);
+
         $this->saleRepositoryMock = $this->mock(SaleRepositoryInterface::class);
-        $this->saleRepositoryMock->shouldReceive('createSale')->andReturn(true);
+
+        $saleData = new stdClass();
+        $saleData->id = 1;
+        $saleData->name = $this->seller->name;
+        $saleData->commission = 'R$ 8.5';
+        $saleData->value = 'R$ 100';
+        $saleData->saleCreation = '2022-11-08 19:50:00';
+        $this->saleRepositoryMock->shouldReceive('createSale')->andReturn($this->saleData);
     }
 
     public function testShouldReturnFalseInCreateSaleWithInvalidSeller()
@@ -72,8 +89,8 @@ class SaleServiceTest extends TestCase
         $output = $simulateSaleRegister->create($input->sellerId, $input->value);
 
         $this->assertEquals(
+            $this->saleData,
             $output,
-            'Venda registrada com sucesso.'
         );
     }
 
@@ -99,8 +116,8 @@ class SaleServiceTest extends TestCase
         $output = $simulateListSales->getSellerAllSales($input->sellerId);
 
         $this->assertEquals(
-            $output,
-            'Nenhuma venda registrada.'
+            'Nenhuma venda registrada.',
+            $output
         );
     }
 
@@ -112,18 +129,27 @@ class SaleServiceTest extends TestCase
         $fakeSales = new stdClass();
         $fakeSales->sellerId = 10;
         $fakeSales->value = 350;
-        $fakeSales = json_encode($fakeSales);
+        $fakeSales->id = 1;
+        $fakeSales->created_at = '2022-11-08 13:00:00';
 
-        $this->saleRepositoryMock->shouldReceive('getSellerAllSales')->andReturn($fakeSales);
+        $this->saleRepositoryMock->shouldReceive('getSellerAllSales')->andReturn([$fakeSales]);
 
         $simulateListSales = new SaleService($this->saleRepositoryMock, $this->sellerRepositoryMock);
-        ;
 
         $output = $simulateListSales->getSellerAllSales($input->sellerId);
 
+
+        $outputConstrutedToValidate = new stdClass();
+        $outputConstrutedToValidate->id = $fakeSales->id = 1;
+        $outputConstrutedToValidate->name = $this->seller->name;
+        $outputConstrutedToValidate->email = $this->seller->email;
+        $outputConstrutedToValidate->commission = "R$29.75";
+        $outputConstrutedToValidate->value = "R$" . $fakeSales->value;
+        $outputConstrutedToValidate->sale_date = $fakeSales->created_at;
+
         $this->assertEquals(
-            $output,
-            $fakeSales
+            [$outputConstrutedToValidate],
+            $output
         );
     }
 }

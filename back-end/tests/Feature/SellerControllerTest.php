@@ -25,11 +25,11 @@ class SellerControllerTest extends TestCase
         $response = $this->post('/api/seller/create', ['name' => Str::random(10), 'email' => fake()->unique()->email()]);
 
         $response->assertStatus(200)
-            ->assertJson([
-                'retcode' => 'SUCCESS',
-                'data' => '',
-                'message' => 'Vendedor cadastrado com sucesso.'
-            ]);
+            ->assertJson(
+                fn (AssertableJson $json) =>
+                $json->hasAny('data', 'id', 'name', 'email')
+                    ->etc()
+            );
     }
 
     public function testShouldListAllSellersRegistered()

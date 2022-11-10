@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Seller;
 use App\Repositories\Interfaces\SellerRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -9,11 +10,10 @@ class SellerRepository implements SellerRepositoryInterface
 {
     public function createSeller($name, $email)
     {
-        return DB::table('seller')
-            ->insert([
-                'name' => $name,
-                'email' => $email
-            ]);
+        return Seller::create([
+            'name' => $name,
+            'email' => $email
+        ]);
     }
 
     public function getAllSellers()
@@ -29,5 +29,12 @@ class SellerRepository implements SellerRepositoryInterface
             ->get()
             ->pluck('id')
             ->toArray();
+    }
+
+    public function getSellerById($sellerId)
+    {
+        return DB::table('seller')
+            ->where('id', '=', $sellerId)
+            ->first();
     }
 }
