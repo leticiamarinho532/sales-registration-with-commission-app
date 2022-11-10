@@ -10,8 +10,11 @@
             <li>
                 <b>-</b>
                 Id: {{sale.id}}
-                Valor da Venda: {{sale.value}}
-                Seller_id: {{sale.seller_id}}
+                | Valor da Venda: {{sale.value}}
+                | Email: {{sale.email}}
+                | Comissão: {{sale.comission}}
+                | Valor: {{sale.value}}
+                | Data de Cadastro: {{sale.sale_date}}
             </li>
         </ul>
     </div>
@@ -47,13 +50,13 @@ export default {
 <style scoped>
     div {
         width: 100%;
-        
-    }
-
-    div {
         text-align: center;
         position: relative;
         top: 50%;
         transform: translateY(50%);
+    }
+
+    li {
+        border: 1px solid #000000;
     }
 </style>

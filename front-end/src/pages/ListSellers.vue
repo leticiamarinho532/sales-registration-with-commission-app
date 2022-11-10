@@ -5,8 +5,9 @@
             <li>
                 <b>-</b>
                 Id: {{seller.id}}
-                Nome: {{seller.name}}
-                email: {{seller.email}}
+                | Nome: {{seller.name}}
+                | email: {{seller.email}}
+                | Comissão: {{seller.commission}}
             </li>
         </ul>
     </div>
@@ -24,9 +25,8 @@ export default {
     },
     methods: {
         async getSellers() {
-            console.log('aqui');
             await api.get('/seller/show/').then(response => {
-                this.sellers = response.data.message;
+                this.sellers = response.data.data;
             });
         }
     },
@@ -39,8 +39,10 @@ export default {
     div {
         width: 100%;
         text-align: center;
-        position: relative;
-        top: 50%;
-        transform: translateY(50%);
+
+    }
+
+    li {
+        border: 1px solid #000000;
     }
 </style>

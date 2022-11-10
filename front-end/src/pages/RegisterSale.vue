@@ -31,7 +31,11 @@ export default {
             };
 
             await api.post('/sale/create', data).then(response => {
-                alert(response.data.message);
+                if (response.data.retcode !== 'SUCCESS') {
+                    alert('Não foi possível cadastar a venda!');
+                }
+
+                alert('Venda Cadastrada com sucesso!');
             })
             
         }
