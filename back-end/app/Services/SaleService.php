@@ -27,7 +27,7 @@ class SaleService
             return false;
         }
 
-        if (!$this->isValidValue($value)) {
+        if (!$this->verifySaleValueIsValue($value)) {
             return false;
         }
 
@@ -82,7 +82,7 @@ class SaleService
         return $saleInfos;
     }
 
-    private function isValidValue($value)
+    public function verifySaleValueIsValue($value)
     {
         if (!is_numeric($value)) {
             return false;
