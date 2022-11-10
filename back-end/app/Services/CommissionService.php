@@ -8,8 +8,10 @@ class CommissionService
 
     public function calculate($value)
     {
-        $result = ($this->percentage/100) * $value;
+        $comission = ($this->percentage/100) * $value;
 
-        return $result;
+        $formattedComission = number_format($comission, 2);
+
+        return $formattedComission;
     }
 }
