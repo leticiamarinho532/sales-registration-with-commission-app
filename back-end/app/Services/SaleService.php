@@ -73,7 +73,7 @@ class SaleService
 
         $saleInfos = new stdClass();
         $saleInfos->id = $sale->id;
-        $saleInfos->name = $sellerInfos->id;
+        $saleInfos->name = $sellerInfos->name;
         $saleInfos->email = $sellerInfos->email;
         $saleInfos->commission = 'R$' . $comissionService->calculate($saleValue);
         $saleInfos->value = 'R$' . $saleValue;
