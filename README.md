@@ -114,6 +114,8 @@ Aviso: Não é necessário rodar comandos para instar as depencias dos projetos 
 
 ## **5. Rotas**
 
+Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o banck-end, consiga fazer uma um tratamento de respotas.
+
 ### Currencies
 
 - POST /seller/create/
@@ -245,6 +247,12 @@ Aviso: Não é necessário rodar comandos para instar as depencias dos projetos 
 ## **6. Explicações de Algumas Funcionalidades**
 - Envio automático de emails diário
 
+
+
 - Banco de Dados
 
+    Não foi disponibilizado um volume para o banco de dados principal `MySQL` por da maneira utilizada, a aplicação consegue ser consutada com o adminer, pelo seu IP local usando porta `8082`. Dessa maneira, para um projeto que ficará somente no local, é mais rápido a conclusão do mesmo.
+
 - Front-end
+
+    O prjeto no front-end não foi colocado nas configrações do docker devido a poucos conhecimentos na utilização do VueJs e foco em aprender e implementar a estrutura básica para criar um projeto.
