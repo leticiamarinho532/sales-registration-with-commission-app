@@ -42,7 +42,12 @@ class SendEmails extends Command
 
             $sumAllSalesDay = 0;
             foreach ($sales as $sale) {
-                $sumAllSalesDay += $sale->value;
+                // dd();
+                if (
+                    substr($sale->created_at, 0, 10) === date('Y-m-d')
+                ) {
+                    $sumAllSalesDay += $sale->value;
+                }
             }
 
             Mail::to($seller->email)->send(new SalesReport($seller, $sumAllSalesDay));

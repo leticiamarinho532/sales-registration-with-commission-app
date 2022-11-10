@@ -91,6 +91,19 @@ services:
     volumes:
         - ./back-end/:/var/www/
 
+  # cron:
+  #   build:
+  #     context: .
+  #     dockerfile: ./back-end/dockerFile-cron
+  #   container_name: cron
+  #   volumes:
+  #     - ./back-end/:/var/www/
+  #   depends_on:
+  #     - app-backend
+  #   networks:
+  #     - app-seller-registraion-with-commission-networks
+
+
 networks:
   app-seller-registraion-with-commission-networks:
     driver: bridge
