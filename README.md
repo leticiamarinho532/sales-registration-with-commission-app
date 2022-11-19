@@ -97,7 +97,7 @@ Aviso: Não é necessário rodar comandos para instar as depencias dos projetos 
 
 - Rode esse comando `docker compose up` na pasta raiz (onde o arquivo docker-compose.yaml está).
 - Use seu Ip local para usar as rotas do back-end que estão listadas no tópico `Rotas`
-- Para usar o front-end, é necessário ter o node.js instalada na sua máquina, e usar o comando `npm run dev` que abrirá uma porta `5173` para usar com seu Ip local.
+- Para usar o front-end, é necessário ter o node.js instalado na sua máquina, e usar o comando `npm run dev` que abrirá uma porta `5173` para usar com seu Ip local.
 - Já tem migrations e seeders prontas para uso! para utliza-las é necessário fazer o passo a passo citado no `tópico testes` para entrar no container e então rodar o comando `php artisan migrate --seed`.
 
 ## **4. Testes**
@@ -107,14 +107,14 @@ Aviso: Não é necessário rodar comandos para instar as depencias dos projetos 
 
     Os testes de integração foram aplicados para assegurar que a junção de tecnologias, que no caso foi a junção com banco de dados, funcione corretamente.
 
-    Para executar os testes, entre no container do projeto back-end `nome do container: app-backend` usando o comando `docker exec -it ID_DO_CONTAINER exec` e utilize artisan para rodar os testes com o comando `php artisan test`.
+    Para executar os testes, entre no container do projeto back-end `nome do container: app-backend` usando o comando `docker exec -it ID_DO_CONTAINER bash` e utilize artisan para rodar os testes com o comando `php artisan test`.
 
 - Como Está sendo usado o banco de dados
     Para os testes não poluirem o banco principal, foi utilizado um banco de dados in memomy `SQLite`. para que isso pudesse acontecer, foi utilizado um arquivo `.env` de testes, com nome de `env.testing`.
 
 ## **5. Rotas**
 
-Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o banck-end, consiga fazer uma um tratamento de respotas.
+Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o banck-end, consiga fazer uma um tratamento de respostas.
 
 ### Currencies
 
