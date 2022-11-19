@@ -246,12 +246,13 @@ Foram feitas algumas modificações nos retornos, para que uma aplicação que c
 
 ## **6. Explicações de Algumas Funcionalidades**
 - Envio automático de emails diário
+
     Não foi disponibilizado atraves do docker a utilização do cron. Foi feito as configurações, porém não encontra-se funcionando. para testar de forma mais manual, será necessário entrar no container do projeto back-end, seguindo as orientações que tem no `tópico de testes` e rodar comando `php artisan schedule:work`. é sugerido modificar a frequencia de disparos de e-mail no arquivo `Kernel.php`.
 
 
 - Banco de Dados
 
-    Não foi disponibilizado um volume para o banco de dados principal `MySQL` por da maneira utilizada, a aplicação consegue ser consutada com o adminer, pelo seu IP local usando porta `8082`. Dessa maneira, para um projeto que ficará somente no local, é mais rápido a conclusão do mesmo.
+    Não foi disponibilizado um volume para o banco de dados principal `MySQL` pois da maneira utilizada, a aplicação consegue ser consutada com o adminer, pelo seu IP local usando porta `8082`. Dessa maneira, para um projeto que ficará somente no local, é mais rápido a conclusão do mesmo.
 
 - Front-end
 
