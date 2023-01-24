@@ -115,7 +115,7 @@ Aviso: Não é necessário rodar comandos para instalar as dependências dos pro
 
 ## **5. Rotas**
 
-Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o banck-end, consiga fazer um tratamento de respostas.
+Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o back-end, consiga fazer um tratamento de respostas.
 
 ### Currencies
 
