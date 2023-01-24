@@ -110,6 +110,7 @@ Aviso: Não é necessário rodar comandos para instar as depencias dos projetos 
     Para executar os testes, entre no container do projeto back-end `nome do container: app-backend` usando o comando `docker exec -it ID_DO_CONTAINER bash` e utilize artisan para rodar os testes com o comando `php artisan test`.
 
 - Como Está sendo usado o banco de dados
+
     Para os testes não poluirem o banco principal, foi utilizado um banco de dados in memomy `SQLite`. para que isso pudesse acontecer, foi utilizado um arquivo `.env` de testes, com nome de `env.testing`.
 
 ## **5. Rotas**
