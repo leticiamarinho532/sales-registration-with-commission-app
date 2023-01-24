@@ -117,8 +117,6 @@ Aviso: Não é necessário rodar comandos para instalar as dependências dos pro
 
 Foram feitas algumas modificações nos retornos, para que uma aplicação que consuma o back-end, consiga fazer um tratamento de respostas.
 
-### Currencies
-
 - POST /seller/create/
 
     Cadastrar um vendendedor.
@@ -206,7 +204,7 @@ Foram feitas algumas modificações nos retornos, para que uma aplicação que c
         "data": {
             "id": 25,
             "name": "LnNEyJfJ46",
-            "email": "leticia.marinho532@gmail.com",
+            "email": "leticia@gmail.com",
             "commission": "R$1.7",
             "value": "R$20",
             "sale_date": "2022-11-10T07:41:10.000000Z"
@@ -236,7 +234,7 @@ Foram feitas algumas modificações nos retornos, para que uma aplicação que c
         "data": {
             "id": 25,
             "name": "LnNEyJfJ46",
-            "email": "leticia.marinho532@gmail.com",
+            "email": "leticia@gmail.com",
             "commission": "R$1.7",
             "value": "R$20",
             "sale_date": "2022-11-10T07:41:10.000000Z"
