@@ -6,10 +6,10 @@
 1. Tecnologias
 2. BoilerPlate
 3. Como usar na sua máquina
-    - Colando
+    - Clonando
     - Definindo Variáveis de Ambiente
     - Rodando
-4. Tests
+4. Testes
     - Unidade / Integração
     - Como Está sendo usado o banco de dados
 5. Rotas
