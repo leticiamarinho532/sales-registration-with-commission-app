@@ -91,7 +91,7 @@ Código que foi feito por mim está localizado nas seguintes pastas:
 - Copie a .env.example para o arquivo .env
 #### Rodando
 ```
-Aviso: Não é necessário rodar comandos para instar as depencias dos projetos pois já existe uma configuração automatica em conjunto com as configurações do docker.
+Aviso: Não é necessário rodar comandos para instalar as dependências dos projetos pois já existe uma configuração automática em conjunto com as configurações do docker.
 ```
 
 
